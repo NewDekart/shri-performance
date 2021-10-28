@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100vw;
+    min-height: 100vh;
+
+    background-color: #da70d6;
+}
+
+.hello {
+    color: #30D5C8;
+}
+
+.decoration {
+    text-decoration: line-through;
+}
+
+.video {
+    width: 70%;
+    height: 50vh;
+}
+
+.row {
+    margin: 2px;
+}
+
+div.black {
+    background-color: black;
+}
