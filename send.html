@@ -10,29 +10,56 @@
 	<main class="main">
 		<h1 class="hello">Hello World!</h1>
 		<iframe class="video" src="https://www.youtube.com/embed/xq-aTe77bkA?list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		<span style="margin: 1rem;">Мой id - a5c78e66-e2c8-4f2c-b319-0cfac4441000</span>
+		<span style="margin: 1rem;">Мой id - 99999999-9999-9999-9999-000000000000</span>
 		<a href="stats.html">Статистика тут</a>
+		<button id="drawInputs" style="margin: 1rem; cursor: pointer" onclick="drawData()">Тык для инпутов</button>
+		<div id="inputs"></div>
 	</main>
 	<script src="send.js"></script>
 	<script>
-
 		let counter = new Counter();
 
-		counter.init('a5c78e66-e2c8-4f2c-b319-0cfac4441000', String(Math.random()).substr(2, 12), 'send test');
+		counter.init('99999999-9999-9999-9999-000000000000', String(Math.random()).substr(2, 12), 'dekart416-shri-perfomance');
 		counter.setAdditionalParams({
 			env: 'production',
+			browser: navigator.userAgentData.brands[0]?.brand,
+			mobile: navigator.userAgentData.mobile,
+			platform: navigator.userAgentData.platform
 		});
 
 		counter.send('connect', performance.timing.connectEnd - performance.timing.connectStart);
 		counter.send('ttfb', performance.timing.responseEnd - performance.timing.requestStart);
+		counter.send('domComplete', performance.timing.domComplete);
+		counter.send('domInteractive', performance.timing.domInteractive);
 
 		let timeStart = Date.now();
 
 		setTimeout(function () {
 			document.querySelector('.hello').classList.add('decoration')
 
-			counter.send('video', Date.now() - timeStart);
+			counter.send('helloDecoration', Date.now() - timeStart);
 		}, Math.random() * 1000 + 500);
+
+		function drawData() {
+			let html = '',
+				count = 300,
+				genStart = Date.now();
+
+			for (let i = 0; i < count; i++) {
+				html += `<input />`
+			}
+
+			counter.send('generateInputs', Date.now() - genStart);
+
+			let drawStart = Date.now();
+
+			document.querySelector('#inputs').innerHTML = html
+
+			requestAnimationFrame(function() {
+				counter.send('drawInputs', Date.now() - drawStart);
+			});
+		};
+
 	</script>
 </body>
 </html>
