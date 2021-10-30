@@ -29,8 +29,8 @@
 
 		counter.send('connect', performance.timing.connectEnd - performance.timing.connectStart);
 		counter.send('ttfb', performance.timing.responseEnd - performance.timing.requestStart);
-		counter.send('domComplete', performance.timing.domComplete);
-		counter.send('domInteractive', performance.timing.domInteractive);
+		counter.send('domLoading', performance.timing.domLoading - performance.timing.navigationStart);
+		counter.send('response', performance.timing.responseEnd - performance.timing.responseStart);
 
 		let timeStart = Date.now();
 
